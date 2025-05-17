@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AML Prediction Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            padding: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+            width: 100%;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .download-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        table {
+            width: 100%;
+            margin-top: 30px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🚨 AML Suspicious Transaction Predictor</h2>
+
+        <form method="POST" action="/predict" enctype="multipart/form-data">
+            <label>Select Training CSV File:</label>
+            <input type="file" name="train_file" accept=".csv" required>
+
+            <label>Select Test CSV File:</label>
+            <input type="file" name="test_file" accept=".csv" required>
+
+            <div class="center">
+                <button type="submit">🔍 Submit</button>
+                <button type="button" class="btn-secondary" onclick="window.location.href='/'">🔁 Reset</button>
+            </div>
+        </form>
+
+        {% if show_results %}
+            <h3 class="center">📊 Prediction Results</h3>
+            <div class="download-links">
+                <a href="/download/json"><button>⬇️ Download JSON</button></a>
+                <a href="/download/excel"><button>⬇️ Download Excel</button></a>
+            </div>
+            <div>
+                {{ table|safe }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
