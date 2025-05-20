@@ -76,4 +76,4 @@ def download_excel():
     return send_from_directory(path, "predictions.xlsx", as_attachment=True)
 
 if __name__ == "__main__":
-    app.run(debug=True, port=7002)
+    app.run(host='0.0.0.0', debug=True, port=9097)
